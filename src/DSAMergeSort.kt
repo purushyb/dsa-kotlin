@@ -35,16 +35,8 @@ fun mergeDataBaseRecords(arr: Array<DataBaseRecord>, low: Int, mid: Int, high: I
     val leftArrLength = mid - low + 1
     val rightArrLength = high - mid
 
-    val leftArr = Array<DataBaseRecord>(leftArrLength) { DataBaseRecord(id = -1, name = "Dummy") }
-    val rightArr = Array<DataBaseRecord>(rightArrLength) { DataBaseRecord(id = -1, name = "Dummy") }
-
-    for (i in 0..<leftArrLength) {
-        leftArr[i] = arr[low + i]
-    }
-
-    for (j in 0..<rightArrLength) {
-        rightArr[j] = arr[mid + 1 + j]
-    }
+    val leftArr = arr.copyOfRange(low, mid+1)
+    val rightArr = arr.copyOfRange(mid + 1, high + 1)
 
     var leftArrIndex = 0
     var rightArrIndex = 0
