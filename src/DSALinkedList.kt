@@ -41,16 +41,37 @@ fun main() {
     println("List after reversing")
     printLinkedList(head)
 
+    val cyclicLinkedListHead = Node(1)
+    cyclicLinkedListHead.next = Node(3)
+    cyclicLinkedListHead.next?.next = Node(4)
+    cyclicLinkedListHead.next?.next?.next = cyclicLinkedListHead.next
+
+    println("Is cycle found ${floydCycleDetection(cyclicLinkedListHead)}")
+
+}
+
+fun floydCycleDetection(head: Node?): Boolean {
+    var slowPointer: Node? = head?.next
+    var fastPointer: Node? = head?.next?.next
+
+    while (slowPointer != null && fastPointer != null && fastPointer.next != null) {
+        if (slowPointer == fastPointer) return true
+
+        slowPointer = slowPointer.next
+        fastPointer = fastPointer.next?.next
+    }
+
+    return false
 }
 
 fun reverseLinkedList(head: Node?): Node? {
-    if(head == null) return head
+    if (head == null) return head
 
     var current: Node? = head
     var prev: Node? = null
     var next: Node? = null
 
-    while(current != null){
+    while (current != null) {
         next = current.next
         current.next = prev
 
@@ -63,20 +84,20 @@ fun reverseLinkedList(head: Node?): Node? {
 }
 
 fun deleteNodeAtStart(head: Node?): Node? {
-    if(head == null) return head
+    if (head == null) return head
     val currHead = head.next
     head.next = null
     return currHead
 }
 
 fun deleteNodeAtEnd(head: Node?): Node? {
-    if(head == null) return head
+    if (head == null) return head
 
-    if(head.next == null) return null
+    if (head.next == null) return null
 
     var currNode = head
 
-    while(currNode?.next?.next != null) {
+    while (currNode?.next?.next != null) {
         currNode = currNode.next
     }
 
@@ -86,25 +107,25 @@ fun deleteNodeAtEnd(head: Node?): Node? {
 }
 
 fun deleteNodeAtPosition(head: Node?, position: Int): Node? {
-    if(head == null) return head
+    if (head == null) return head
 
-    if(position == 1) {
+    if (position == 1) {
         val newHead = head.next
         head.next = null
         return newHead
     }
 
     var currNode = head
-    for(i in 1..< position - 1) {
+    for (i in 1..<position - 1) {
 
-        if(currNode == null) {
+        if (currNode == null) {
             break
         }
 
         currNode = currNode.next
     }
 
-    if(currNode == null) return head
+    if (currNode == null) return head
 
     currNode.next = currNode.next?.next
 
@@ -116,7 +137,7 @@ fun insertAfterPosition(head: Node, position: Int, newData: Int): Node {
 
     var currentNode: Node? = head
 
-    if(position == 1) {
+    if (position == 1) {
         val newNode = Node(data = newData)
         newNode.next = head
         return newNode
@@ -173,7 +194,7 @@ fun insertAtEnd(head: Node, key: Int): Node {
 }
 
 fun getLinkedListLength(head: Node?): Int {
-    if(head == null) return 0
+    if (head == null) return 0
     var count = 0
     var currentNode: Node? = head
 
@@ -186,7 +207,7 @@ fun getLinkedListLength(head: Node?): Int {
 }
 
 fun printLinkedList(head: Node?) {
-    if(head == null) return
+    if (head == null) return
     var currentNode: Node? = head
 
     while (currentNode != null) {
