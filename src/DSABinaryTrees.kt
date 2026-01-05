@@ -1,4 +1,4 @@
-data class BinaryTreeNode(val data: Int, var left: BinaryTreeNode? = null, var right: BinaryTreeNode? = null)
+import utils.BinaryTreeNode
 
 fun main() {
     val binaryTreeRoot = BinaryTreeNode(1)
