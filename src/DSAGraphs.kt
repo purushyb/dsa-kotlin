@@ -16,6 +16,15 @@ fun main() {
         arrayOf(arrayOf(1, 6), arrayOf(3, 10))                 // Node 4
     )
     println(dijkstraShortestPath(unDirectedWeightedGraph, 0).contentToString())
+
+    val cyclicDirectedGraph = arrayOf(
+        arrayOf(1),
+        arrayOf(2),
+        arrayOf(0, 3),
+        arrayOf()
+    )
+
+    println(isCycleExists(cyclicDirectedGraph))
 }
 
 fun dfs(adjList: Array<Array<Int>>): List<Int> {
@@ -78,7 +87,7 @@ fun dijkstraShortestPath(adj: Array<Array<Array<Int>>>, startNode: Int): Array<I
     while (pq.isNotEmpty()) {
         val (currentSmallestElement, currentSmallestDistance) = pq.poll()
 
-        if(currentSmallestDistance > distances[currentSmallestElement]) continue
+        if (currentSmallestDistance > distances[currentSmallestElement]) continue
 
         for ((neighbor, neighborWeight) in adj[currentSmallestElement]) {
             val newDistance = currentSmallestDistance + neighborWeight
@@ -89,4 +98,37 @@ fun dijkstraShortestPath(adj: Array<Array<Array<Int>>>, startNode: Int): Array<I
         }
     }
     return distances
+}
+
+fun dfsCycleDetection(
+    adj: Array<Array<Int>>,
+    visited: Array<Boolean>,
+    recurStack: Array<Boolean>,
+    currElement: Int
+): Boolean {
+    if (recurStack[currElement]) return true
+
+    if (visited[currElement]) return false
+
+    visited[currElement] = true
+    recurStack[currElement] = true
+
+    for (i in adj[currElement]) {
+        if (dfsCycleDetection(adj, visited, recurStack, i)) return true
+    }
+    recurStack [currElement] = false
+    return false
+
+}
+
+fun isCycleExists(adj: Array<Array<Int>>): Boolean {
+
+    val visitedArray = Array(adj.size) { false }
+    val recurArray = Array(adj.size) { false }
+
+    for (i in 0..<adj.size) {
+        if (!visitedArray[i] && dfsCycleDetection(adj, visitedArray, recurArray, i)) return true
+    }
+    return false
+
 }
