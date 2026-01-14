@@ -39,9 +39,10 @@ fun isPrefix(word: String, root: TrieNode): Boolean {
     var currNode = root
 
     for(i in word) {
-        if(currNode.children[i] != null) {
-            currNode = currNode.children[i]!!
+        if(currNode.children[i] == null) {
+            return false
         }
+        currNode = currNode.children[i]!!
     }
     return true
 }

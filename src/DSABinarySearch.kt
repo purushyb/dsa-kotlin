@@ -33,7 +33,7 @@ fun dsaBinarySearchGeneric(elementsToSearch: Array<DataBaseRecord>, idToSearch: 
     var midIndex: Int
 
     while (leftIndex <= rightIndex) {
-        midIndex = (rightIndex + leftIndex) / 2
+        midIndex = leftIndex + (rightIndex - leftIndex) / 2
         if (idToSearch == elementsToSearch[midIndex].id) {
             return midIndex
         } else if (idToSearch > elementsToSearch[midIndex].id) {

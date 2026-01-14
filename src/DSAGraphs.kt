@@ -39,14 +39,12 @@ fun dfsRecursion(
     output: MutableList<Int>,
     currentNode: Int
 ) {
-
+    if (visitedNodes.get(currentNode) == true) return
     visitedNodes[currentNode] = true
     output.add(currentNode)
 
     for (i in adjList[currentNode]) {
-        if (!visitedNodes.getOrDefault(i, false)) {
             dfsRecursion(adjList, visitedNodes, output, i)
-        }
     }
 
 }

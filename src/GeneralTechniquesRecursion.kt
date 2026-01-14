@@ -19,7 +19,6 @@ fun main() {
 fun sum(n: Int): Int {
     // Base case:
     if (n == 1) return n
-
     // recursive Case + Termination case
     return n + sum(n - 1)
 }
