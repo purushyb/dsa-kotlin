@@ -1,10 +1,10 @@
-data class Node(val data: Int, var next: Node? = null)
+data class DSANode(val data: Int, var next: DSANode? = null)
 
 fun main() {
-    var head: Node? = Node(data = 1)
-    head?.next = Node(data = 2)
-    head?.next?.next = Node(data = 3)
-    head?.next?.next?.next = Node(data = 4)
+    var head: DSANode? = DSANode(data = 1)
+    head?.next = DSANode(data = 2)
+    head?.next?.next = DSANode(data = 3)
+    head?.next?.next?.next = DSANode(data = 4)
 
     println(getLinkedListLength(head))
     printLinkedList(head)
@@ -41,18 +41,18 @@ fun main() {
     println("List after reversing")
     printLinkedList(head)
 
-    val cyclicLinkedListHead = Node(1)
-    cyclicLinkedListHead.next = Node(3)
-    cyclicLinkedListHead.next?.next = Node(4)
+    val cyclicLinkedListHead = DSANode(1)
+    cyclicLinkedListHead.next = DSANode(3)
+    cyclicLinkedListHead.next?.next = DSANode(4)
     cyclicLinkedListHead.next?.next?.next = cyclicLinkedListHead.next
 
     println("Is cycle found ${floydCycleDetection(cyclicLinkedListHead)}")
 
 }
 
-fun floydCycleDetection(head: Node?): Boolean {
-    var slowPointer: Node? = head?.next
-    var fastPointer: Node? = head?.next?.next
+fun floydCycleDetection(head: DSANode?): Boolean {
+    var slowPointer: DSANode? = head?.next
+    var fastPointer: DSANode? = head?.next?.next
 
     while (slowPointer != null && fastPointer != null && fastPointer.next != null) {
         if (slowPointer == fastPointer) return true
@@ -64,12 +64,12 @@ fun floydCycleDetection(head: Node?): Boolean {
     return false
 }
 
-fun reverseLinkedList(head: Node?): Node? {
+fun reverseLinkedList(head: DSANode?): DSANode? {
     if (head == null) return head
 
-    var current: Node? = head
-    var prev: Node? = null
-    var next: Node? = null
+    var current: DSANode? = head
+    var prev: DSANode? = null
+    var next: DSANode? = null
 
     while (current != null) {
         next = current.next
@@ -83,14 +83,14 @@ fun reverseLinkedList(head: Node?): Node? {
 
 }
 
-fun deleteNodeAtStart(head: Node?): Node? {
+fun deleteNodeAtStart(head: DSANode?): DSANode? {
     if (head == null) return head
     val currHead = head.next
     head.next = null
     return currHead
 }
 
-fun deleteNodeAtEnd(head: Node?): Node? {
+fun deleteNodeAtEnd(head: DSANode?): DSANode? {
     if (head == null) return head
 
     if (head.next == null) return null
@@ -106,7 +106,7 @@ fun deleteNodeAtEnd(head: Node?): Node? {
     return head
 }
 
-fun deleteNodeAtPosition(head: Node?, position: Int): Node? {
+fun deleteNodeAtPosition(head: DSANode?, position: Int): DSANode? {
     if (head == null) return head
 
     if (position == 1) {
@@ -132,97 +132,97 @@ fun deleteNodeAtPosition(head: Node?, position: Int): Node? {
     return head
 }
 
-fun insertAfterPosition(head: Node, position: Int, newData: Int): Node {
+fun insertAfterPosition(head: DSANode, position: Int, newData: Int): DSANode {
     if (position < 1) return head
 
-    var currentNode: Node? = head
+    var currentDSANode: DSANode? = head
 
     if (position == 1) {
-        val newNode = Node(data = newData)
-        newNode.next = head
-        return newNode
+        val newDSANode = DSANode(data = newData)
+        newDSANode.next = head
+        return newDSANode
     }
 
     for (i in 1..<position - 1) {
-        if (currentNode == null) {
+        if (currentDSANode == null) {
             break
         }
-        currentNode = currentNode.next
+        currentDSANode = currentDSANode.next
     }
 
-    if (currentNode == null) return head
+    if (currentDSANode == null) return head
 
-    val newNode = Node(data = newData)
-    newNode.next = currentNode.next
-    currentNode.next = newNode
+    val newDSANode = DSANode(data = newData)
+    newDSANode.next = currentDSANode.next
+    currentDSANode.next = newDSANode
 
     return head
 }
 
-fun insertAfterElement(head: Node, key: Int, newData: Int): Node {
-    var currNode: Node? = head
+fun insertAfterElement(head: DSANode, key: Int, newData: Int): DSANode {
+    var currDSANode: DSANode? = head
 
-    while (currNode != null) {
-        if (currNode.data == key) {
+    while (currDSANode != null) {
+        if (currDSANode.data == key) {
             break
         }
-        currNode = currNode.next
+        currDSANode = currDSANode.next
     }
 
-    if (currNode == null) {
+    if (currDSANode == null) {
         println("Unable to insert")
         return head
     }
 
-    val newNode = Node(data = newData)
+    val newDSANode = DSANode(data = newData)
 
-    newNode.next = currNode.next
-    currNode.next = newNode
+    newDSANode.next = currDSANode.next
+    currDSANode.next = newDSANode
     return head
 }
 
-fun insertAtEnd(head: Node, key: Int): Node {
-    val newNode = Node(data = key)
-    var currNode: Node? = head
+fun insertAtEnd(head: DSANode, key: Int): DSANode {
+    val newDSANode = DSANode(data = key)
+    var currDSANode: DSANode? = head
 
-    while (currNode?.next != null) {
-        currNode = currNode.next
+    while (currDSANode?.next != null) {
+        currDSANode = currDSANode.next
     }
 
-    currNode?.next = newNode
+    currDSANode?.next = newDSANode
     return head
 }
 
-fun getLinkedListLength(head: Node?): Int {
+fun getLinkedListLength(head: DSANode?): Int {
     if (head == null) return 0
     var count = 0
-    var currentNode: Node? = head
+    var currentDSANode: DSANode? = head
 
-    while (currentNode != null) {
-        currentNode = currentNode.next
+    while (currentDSANode != null) {
+        currentDSANode = currentDSANode.next
         count++
     }
 
     return count
 }
 
-fun printLinkedList(head: Node?) {
+fun printLinkedList(head: DSANode?) {
     if (head == null) return
-    var currentNode: Node? = head
+    var currentDSANode: DSANode? = head
 
-    while (currentNode != null) {
-        print(currentNode.data)
+    while (currentDSANode != null) {
+        print(currentDSANode.data)
 
-        if (currentNode.next != null) {
+        if (currentDSANode.next != null) {
             print(" -> ")
         }
-        currentNode = currentNode.next
+        currentDSANode = currentDSANode.next
     }
     println()
 }
 
-fun insertAtFirst(head: Node?, key: Int): Node {
-    val newNode = Node(data = key)
-    newNode.next = head
-    return newNode
+fun insertAtFirst(head: DSANode?, key: Int): DSANode {
+    val newDSANode = DSANode(data = key)
+    newDSANode.next = head
+    return newDSANode
 }
