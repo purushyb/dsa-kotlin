@@ -29,22 +29,24 @@ fun main() {
 
 fun dfs(adjList: Array<Array<Int>>): List<Int> {
     val result = mutableListOf<Int>()
-    dfsRecursion(adjList, mutableMapOf<Int, Boolean>(), result, 0)
+    dfsRecursion(adjList, Array<Boolean>(adjList.size) { false }, result, 0)
     return result
 }
 
 fun dfsRecursion(
     adjList: Array<Array<Int>>,
-    visitedNodes: MutableMap<Int, Boolean>,
+    visitedNodes: Array<Boolean>,
     output: MutableList<Int>,
     currentNode: Int
 ) {
-    if (visitedNodes.get(currentNode) == true) return
-    visitedNodes[currentNode] = true
+    if (visitedNodes[currentNode] == true) return
     output.add(currentNode)
 
     for (i in adjList[currentNode]) {
+        if (!visitedNodes[i]) {
+            visitedNodes[currentNode] = true
             dfsRecursion(adjList, visitedNodes, output, i)
+        }
     }
 
 }
@@ -114,7 +116,7 @@ fun dfsCycleDetection(
     for (i in adj[currElement]) {
         if (dfsCycleDetection(adj, visited, recurStack, i)) return true
     }
-    recurStack [currElement] = false
+    recurStack[currElement] = false
     return false
 
 }
