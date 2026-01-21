@@ -53,7 +53,7 @@ fun dsaBinarySearch(arrayToSearch: Array<Int>, elementToFind: Int): Int {
     var midIndex: Int
 
     while (leftIndex <= rightIndex) {
-        midIndex = (rightIndex + leftIndex) / 2
+        midIndex = leftIndex + (rightIndex - leftIndex ) / 2
 
         if (arrayToSearch[midIndex] == elementToFind) {
             return midIndex
