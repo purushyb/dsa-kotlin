@@ -59,6 +59,16 @@ class LeetCode_146_LRU_Cache(val capacity: Int) {
     }
 }
 
+class LRUCache(capacity: Int): LinkedHashMap<Int, Int>(capacity, 0.75f, true) {
+    override fun removeEldestEntry(eldest: Map.Entry<Int?, Int?>?): Boolean {
+        return super.removeEldestEntry(eldest)
+    }
+
+    override fun get(key: Int): Int {
+        return this.getOrDefault(key, -1)
+    }
+}
+
 fun main() {
     val capacity = 2
     val lRUCache = LeetCode_146_LRU_Cache(capacity)
