@@ -5,15 +5,13 @@ object LeetCode_20_valid_parentheses {
     fun isValid(s: String): Boolean {
         val stack = ArrayDeque<Char>()
         for (currBracket in s) {
-
-            when(currBracket) {
-                '(', '{', '[' -> stack.addLast(currBracket)
-
-                ')' -> if(stack.peekLast() == '(') stack.removeLast() else return false
-                '}' -> if(stack.peekLast() == '{') stack.removeLast() else return false
-                ']' -> if(stack.peekLast() == '[') stack.removeLast() else return false
-                else -> return false
-            }
+            if (currBracket in arrayOf('(', '{', '[')) {
+                stack.addLast(currBracket)
+            } else if (currBracket == ')' && stack.peekLast() == '('
+                || currBracket == '}' && stack.peekLast() == '{'
+                || currBracket == ']' && stack.peekLast() == '['
+            ) stack.removeLast()
+            else return false
         }
 
         return stack.isEmpty()

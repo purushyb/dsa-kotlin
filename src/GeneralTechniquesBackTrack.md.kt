@@ -1,12 +1,12 @@
 fun main() {
-//    val opList = mutableListOf<String>()
-//    val ip = "ABC"
-//    permutationsRecur(StringBuilder(ip), 0, opList)
-//    print(opList)
-//
+    val opList = mutableListOf<String>()
+    val ip = "ABC"
+    permutationsRecur(StringBuilder(ip), 0, opList)
+    println(opList)
+
 
     // sudoku solve
-//
+
     val matrix = arrayOf(
         arrayOf(3, 0, 6, 5, 0, 8, 4, 0, 0),
         arrayOf(5, 2, 0, 0, 0, 0, 0, 0, 0),
@@ -50,7 +50,7 @@ fun nQueens(matrix: Array<Array<Int>>, output: MutableList<Array<Int>>, row: Int
             }
         }
         output.add(newCombination)
-//        return
+        return
     }
 
     for (i in 0..<queensCount) {
